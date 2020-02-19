@@ -10,6 +10,7 @@ import {
   ARTICLE_PAGE_UNLOADED,
   EDITOR_PAGE_UNLOADED,
   HOME_PAGE_UNLOADED,
+  ADMIN_PAGE_UNLOADED,
   PROFILE_PAGE_UNLOADED,
   PROFILE_FAVORITES_PAGE_UNLOADED,
   SETTINGS_PAGE_UNLOADED,
@@ -18,7 +19,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Conduit',
+  appName: 'buchabet',
   token: null,
   viewChangeCounter: 0
 };
@@ -62,6 +63,7 @@ export default (state = defaultState, action) => {
     case PROFILE_FAVORITES_PAGE_UNLOADED:
     case SETTINGS_PAGE_UNLOADED:
     case LOGIN_PAGE_UNLOADED:
+    case ADMIN_PAGE_UNLOADED:
     case REGISTER_PAGE_UNLOADED:
       return { ...state, viewChangeCounter: state.viewChangeCounter + 1 };
     default:

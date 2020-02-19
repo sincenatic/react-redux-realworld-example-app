@@ -17,7 +17,9 @@ class SettingsForm extends React.Component {
       username: '',
       bio: '',
       email: '',
-      password: ''
+      password: '',
+      accountNumber: '',
+      phoneNumber: ''
     };
 
     this.updateState = field => ev => {
@@ -44,7 +46,10 @@ class SettingsForm extends React.Component {
         image: this.props.currentUser.image || '',
         username: this.props.currentUser.username,
         bio: this.props.currentUser.bio,
-        email: this.props.currentUser.email
+        email: this.props.currentUser.email,
+        accountNumber: this.props.currentUser.accountNumber,
+        phoneNumber: this.props.currentUser.phoneNumber
+
       });
     }
   }
@@ -55,7 +60,9 @@ class SettingsForm extends React.Component {
         image: nextProps.currentUser.image || '',
         username: nextProps.currentUser.username,
         bio: nextProps.currentUser.bio,
-        email: nextProps.currentUser.email
+        email: nextProps.currentUser.email,
+        accountNumber: nextProps.currentUser.accountNumber,
+        phoneNumber: nextProps.currentUser.phoneNumber
       }));
     }
   }
@@ -63,10 +70,31 @@ class SettingsForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.submitForm}>
-        <fieldset>
+      <br /><br /><br />
 
+      <h3>ข้อมูลบัญชี</h3><br /><br />
+
+      <fieldset className="form-group">
+        เลขที่บัญชี<input
+          className="form-control form-control-lg"
+          type="text"
+          placeholder=""
+          value={this.state.accountNumber}
+          onChange={this.updateState('accountNumber')} />
+      </fieldset>
+      <fieldset className="form-group">
+        เบอร์โทร<input
+          className="form-control form-control-lg"
+          type="text"
+          placeholder=""
+          value={this.state.phoneNumber}
+          onChange={this.updateState('phoneNumber')} />
+      </fieldset>
+
+        <fieldset>
+        <h3>ข้อมูลส่วนตัว</h3><br /><br />
           <fieldset className="form-group">
-            <input
+        ลิงค์รูปโปรไฟล์<input
               className="form-control"
               type="text"
               placeholder="URL of profile picture"
@@ -75,7 +103,7 @@ class SettingsForm extends React.Component {
           </fieldset>
 
           <fieldset className="form-group">
-            <input
+            ชื่อ-นามสกุล<input
               className="form-control form-control-lg"
               type="text"
               placeholder="Username"
@@ -84,6 +112,7 @@ class SettingsForm extends React.Component {
           </fieldset>
 
           <fieldset className="form-group">
+          แนะนำตัว
             <textarea
               className="form-control form-control-lg"
               rows="8"
@@ -92,7 +121,7 @@ class SettingsForm extends React.Component {
               onChange={this.updateState('bio')}>
             </textarea>
           </fieldset>
-
+          อีเมล
           <fieldset className="form-group">
             <input
               className="form-control form-control-lg"
@@ -101,7 +130,7 @@ class SettingsForm extends React.Component {
               value={this.state.email}
               onChange={this.updateState('email')} />
           </fieldset>
-
+          เปลี่ยนรหัสผ่าน
           <fieldset className="form-group">
             <input
               className="form-control form-control-lg"
@@ -115,7 +144,7 @@ class SettingsForm extends React.Component {
             className="btn btn-lg btn-primary pull-xs-right"
             type="submit"
             disabled={this.state.inProgress}>
-            Update Settings
+            อัพเดทข้อมูล
           </button>
 
         </fieldset>
@@ -144,7 +173,7 @@ class Settings extends React.Component {
           <div className="row">
             <div className="col-md-6 offset-md-3 col-xs-12">
 
-              <h1 className="text-xs-center">Your Settings</h1>
+              <h1 className="text-xs-center">การตั้งค่า</h1>
 
               <ListErrors errors={this.props.errors}></ListErrors>
 
@@ -154,11 +183,7 @@ class Settings extends React.Component {
 
               <hr />
 
-              <button
-                className="btn btn-outline-danger"
-                onClick={this.props.onClickLogout}>
-                Or click here to logout.
-              </button>
+
 
             </div>
           </div>

@@ -18,8 +18,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
   onChangeUsername: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'username', value }),
-  onSubmit: (username, email, password) => {
-    const payload = agent.Auth.register(username, email, password);
+  onChangeAccountNumber: value =>
+    dispatch({ type: UPDATE_FIELD_AUTH, key: 'accountNumber', value }),
+  onChangePhoneNumber: value =>
+    dispatch({ type: UPDATE_FIELD_AUTH, key: 'phoneNumber', value }),
+  onSubmit: (username, email, password, accountNumber, phoneNumber) => {
+    const payload = agent.Auth.register(username, email, password, accountNumber, phoneNumber);
     dispatch({ type: REGISTER, payload })
   },
   onUnload: () =>
@@ -32,9 +36,11 @@ class Register extends React.Component {
     this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.changeUsername = ev => this.props.onChangeUsername(ev.target.value);
-    this.submitForm = (username, email, password) => ev => {
+    this.changeAccountNumber = ev => this.props.onChangeAccountNumber(ev.target.value);
+    this.changePhoneNumber = ev => this.props.onChangePhoneNumber(ev.target.value);
+    this.submitForm = (username, email, password, accountNumber, phoneNumber) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(username, email, password);
+      this.props.onSubmit(username, email, password, accountNumber, phoneNumber);
     }
   }
 
@@ -46,30 +52,31 @@ class Register extends React.Component {
     const email = this.props.email;
     const password = this.props.password;
     const username = this.props.username;
-
+    const accountNumber = this.props.accountNumber;
+    const phoneNumber = this.props.phoneNumber;
     return (
       <div className="auth-page">
         <div className="container page">
           <div className="row">
 
             <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign Up</h1>
+              <h1 className="text-xs-center">สมัครสมาขิก</h1>
               <p className="text-xs-center">
                 <Link to="/login">
-                  Have an account?
+                  มีบัญชีแล้ว?
                 </Link>
               </p>
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(username, email, password)}>
+              <form onSubmit={this.submitForm(username, email, password, accountNumber, phoneNumber)}>
                 <fieldset>
 
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Username"
+                      placeholder="ชื่่อ-นามสกุล"
                       value={this.props.username}
                       onChange={this.changeUsername} />
                   </fieldset>
@@ -78,7 +85,7 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="email"
-                      placeholder="Email"
+                      placeholder="อีเมล"
                       value={this.props.email}
                       onChange={this.changeEmail} />
                   </fieldset>
@@ -87,16 +94,32 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="password"
-                      placeholder="Password"
+                      placeholder="รหัสผ่าน"
                       value={this.props.password}
                       onChange={this.changePassword} />
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="text"
+                      placeholder="เลขที่บัญชี"
+                      value={this.props.accountNumber}
+                      onChange={this.changeAccountNumber} />
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="text"
+                      placeholder="เบอร์โทรศัพท์"
+                      value={this.props.phoneNumber}
+                      onChange={this.changePhoneNumber} />
                   </fieldset>
 
                   <button
                     className="btn btn-lg btn-primary pull-xs-right"
                     type="submit"
                     disabled={this.props.inProgress}>
-                    Sign up
+                    ตกลง
                   </button>
 
                 </fieldset>

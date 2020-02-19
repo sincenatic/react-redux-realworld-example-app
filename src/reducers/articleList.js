@@ -19,6 +19,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         articles: state.articles.map(article => {
+          
           if (article.slug === action.payload.article.slug) {
             return {
               ...article,

@@ -46,10 +46,10 @@ class Login extends React.Component {
           <div className="row">
 
             <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign In</h1>
+              <h1 className="text-xs-center">เข้าสู่ระบบ</h1>
               <p className="text-xs-center">
                 <Link to="/register">
-                  Need an account?
+                  ต้องการบัญชีใช่ไหม?
                 </Link>
               </p>
 
@@ -80,14 +80,36 @@ class Login extends React.Component {
                     className="btn btn-lg btn-primary pull-xs-right"
                     type="submit"
                     disabled={this.props.inProgress}>
-                    Sign in
+                    เข้าสู่ระบบ
                   </button>
+
+
+
 
                 </fieldset>
               </form>
+
             </div>
 
+
           </div>
+          <div className="row">
+          <div className="col-md-7 offset-md-3 col-xs-12">
+          <h5 className="text-xs-center">หรือ</h5>
+          </div>
+          </div>
+          <div className="row">
+          <div className="col-md-5 offset-md-3 col-xs-12">
+          <button
+            className="btn btn-lg btn btn-outline-info pull-xs-right"
+            type="submit"
+            disabled={this.props.inProgress}>
+            เข้าสู่ระบบผ่าน facebook
+          </button>
+
+          </div>
+          </div>
+
         </div>
       </div>
     );
